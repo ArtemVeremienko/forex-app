@@ -1,13 +1,12 @@
 import React from 'react';
 import TableCell from '../TableCell/TableCell';
 
-export default function TableRow({ currency, buy, sell }) {
-
+export default function TableRow({ currency, buy, sell, onChangePrice }) {
   return (
     <tr>
       <td>{currency}</td>
-      <TableCell price={buy} />
-      <TableCell price={sell} />
+      <TableCell price={+buy} onChangePrice={onChangePrice('buy')} />
+      <TableCell price={+sell} onChangePrice={onChangePrice('sale')} />
     </tr>
   )
 }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Table.css';
 import TableRow from '../TableRow/TableRow';
 
-export default function Table({ data, isError }) {
+export default function Table({ data, isError, onChangePrice }) {
 
   return (
     <>
@@ -28,6 +28,7 @@ export default function Table({ data, isError }) {
                     buy={buy}
                     sell={sale}
                     key={index}
+                    onChangePrice={onChangePrice(index)}
                   />
                 })
               }
