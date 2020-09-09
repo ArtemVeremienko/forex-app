@@ -22,11 +22,17 @@ export default function Main() {
       localStorage.setItem('reqCounter', `${+prev + 1}`)
       return +prev + 1;
     })
-  }, [])
+  }, []);
+
+  const onChangePrice = index => direction => newPrice => {
+    const newData = [...data];
+    newData[index][direction] = newPrice;
+    setData(newData);
+  }
 
   return (
     <main className="main">
-      <Table data={data} isError={!(requestCount % 5)} />
+      <Table data={data} isError={!(requestCount % 5)} onChangePrice={onChangePrice} />
       <Converter />
     </main>
   )
