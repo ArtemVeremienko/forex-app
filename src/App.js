@@ -1,21 +1,19 @@
 import React from 'react';
 import './App.css';
 import Main from './components/Main/Main';
+import Box from '@material-ui/core/Box';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
-    <div className="app">
-      <header className="header">
-        <p>Text</p>
-        <img src="#" alt="Logo" />
-      </header>
+    <Box display="flex" flexDirection="column" height="100vh">
+      <Header />
 
       <Main />
 
-      <footer className="footer">
-        <span className="footer__copyright">2020 all right reserved</span>
-      </footer>
-    </div>
+      <Footer />
+    </Box>
   );
 }
 
