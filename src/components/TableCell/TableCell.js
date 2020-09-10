@@ -6,19 +6,19 @@ export default function TableCell({ price, onChangePrice }) {
   const [isHovering, setHovering] = useState(false);
   const [isEditing, setEditing] = useState(false);
   const [isSaving, setSaving] = useState(true);
-
   const inputRef = useRef();
 
-  const minPrice = price * 0.9;
-  const maxPrice = price * 1.1;
+  const minPrice = Math.round(price * 90) / 100;
+  const maxPrice = Math.round(price * 110) / 100;
 
   const handleClose = (isClose) => {
     setHovering(isClose)
     setEditing(false)
     setValue(price);
+    inputRef.current.blur();
   }
 
-  const handleEdit = () => {
+  const handleEdit = (event) => {
     setHovering(false);
     setEditing(true);
     inputRef.current.focus();
@@ -49,11 +49,13 @@ export default function TableCell({ price, onChangePrice }) {
       <input
         className={styles.input}
         type="number"
+        min={minPrice}
+        max={maxPrice}
         value={value}
-        disabled={!isEditing}
+        step="0.1"
+        readOnly={!isEditing}
         onChange={handleChange}
         ref={inputRef}
-        step="0.1"
       />
       {isHovering &&
         <button
@@ -63,14 +65,12 @@ export default function TableCell({ price, onChangePrice }) {
       {isEditing && isSaving &&
         <button
           className={["material-icons", styles.button, styles.check].join(' ')}
-          contentEditable={false}
           onClick={handleSave}
         >check</button>
       }
       {isEditing &&
         <button
           className={["material-icons", styles.button].join(' ')}
-          contentEditable={false}
           onClick={() => handleClose(true)}
         > close</button >
       }

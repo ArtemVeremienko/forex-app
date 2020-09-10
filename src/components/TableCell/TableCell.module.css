@@ -23,7 +23,3 @@
   padding: 20px;
   border: none;
 }
-
-.input:disabled {
-  color: black;
-}
