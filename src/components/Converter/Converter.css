@@ -5,3 +5,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.converter__group {
+  flex: 1;
+}
