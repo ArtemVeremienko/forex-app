@@ -22,12 +22,14 @@ export default function Converter({ data }) {
 
   useEffect(() => {
     setExchange(prev => {
-      const quote = data.find(item => item.ccy === prev.ccy && item.base_ccy === prev.base_ccy).buy
+      const newList = data.filter(i => i.base_ccy === prev.base_ccy);
+      console.log(newList)
+      const quote = newList[0].buy
       return {
         ...prev,
         result: resultRound(prev.amount, quote),
         quote: quote,
-        getList: data.filter(i => i.base_ccy === prev.base_ccy).map(i => i.ccy),
+        getList: newList.map(i => i.ccy),
       }
     })
   }, [data])
@@ -44,13 +46,14 @@ export default function Converter({ data }) {
   const handleChangeSelect = (e) => {
     const value = e.target.value;
     setExchange(prev => {
-      const quote = data.find(cur => cur.base_ccy === value).buy
+      const newGetList = data.filter(i => i.base_ccy === value);
+      const quote = newGetList[0].buy
       return {
         ...prev,
         base_ccy: value,
         quote: quote,
         result: resultRound(prev.amount, quote),
-        getList: data.reduce((arr, i) => i.base_ccy === value ? [...arr, i.ccy] : arr, []),
+        getList: newGetList.map(i => i.ccy),
       }
     })
   }
@@ -58,7 +61,8 @@ export default function Converter({ data }) {
   const handleGetSelect = (e) => {
     const value = e.target.value;
     setExchange(prev => {
-      const quote = data.find(cur => cur.ccy === value && cur.base_ccy === prev.base_ccy).buy;
+      const newList = data.filter(i => i.ccy === value);
+      const quote = newList[0].buy;
       return {
         ...prev,
         ccy: value,
