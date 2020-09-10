@@ -23,7 +23,6 @@ export default function Converter({ data }) {
   useEffect(() => {
     setExchange(prev => {
       const newList = data.filter(i => i.base_ccy === prev.base_ccy);
-      console.log(newList)
       const quote = newList[0].buy
       return {
         ...prev,
