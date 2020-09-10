@@ -12,8 +12,13 @@ export default function Main() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(API).then(response => response.json());
-      setData(result);
+      const result = await fetch(API)
+        .then(response => response.json())
+        .catch(error => {
+          setRequestCount(5);
+          return [];
+        });
+      setData(result.filter(item => item.ccy !== 'RUR'));
     };
 
     fetchData();
