@@ -44,12 +44,12 @@ export default function Converter({ data }) {
   const handleChangeSelect = (e) => {
     const value = e.target.value;
     setExchange(prev => {
-      const quote = data.find(cur => cur.base_ccy === value && cur.ccy === prev.ccy).buy
+      const quote = data.find(cur => cur.base_ccy === value).buy
       return {
         ...prev,
         base_ccy: value,
         quote: quote,
-        result: resultRound(value, quote),
+        result: resultRound(prev.amount, quote),
         getList: data.reduce((arr, i) => i.base_ccy === value ? [...arr, i.ccy] : arr, []),
       }
     })
