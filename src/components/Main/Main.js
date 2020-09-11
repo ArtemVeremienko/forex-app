@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './Main.css';
 import Table from '../Table/Table'
 import Converter from '../Converter/Converter';
+import Box from '@material-ui/core/Box';
 
 const API = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';
 
@@ -33,9 +33,14 @@ export default function Main() {
   }
 
   return (
-    <main className="main">
-      <Table data={data} isError={!(requestCount % 5)} onChangePrice={onChangePrice} />
+    <Box component="main" boxShadow={4} flexGrow={1} p={5}>
+      <Table
+        data={data}
+        isError={!(requestCount % 5)}
+        onChangePrice={onChangePrice}
+      />
+
       <Converter data={data} />
-    </main>
+    </Box>
   )
 }
