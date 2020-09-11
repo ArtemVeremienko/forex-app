@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import styles from './TableCell.module.css'
+import styles from './TableCell.module.css';
+import MuiTableCell from '@material-ui/core/TableCell';
 
 export default function TableCell({ price, onChangePrice }) {
   const [value, setValue] = useState(price);
@@ -41,7 +42,7 @@ export default function TableCell({ price, onChangePrice }) {
   }
 
   return (
-    <td
+    <MuiTableCell
       className={styles.cell}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => handleClose(false)}
@@ -74,6 +75,6 @@ export default function TableCell({ price, onChangePrice }) {
           onClick={() => handleClose(true)}
         > close</button >
       }
-    </td >
+    </MuiTableCell >
   )
 }
