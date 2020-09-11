@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import './Converter.css';
+import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import SwapHoriz from '@material-ui/icons/SwapHoriz';
+
 
 export default function Converter({ data }) {
   const [exchange, setExchange] = useState({
     base_ccy: 'UAH',
     ccy: 'USD',
     quote: 27.5,
-    amount: 100,
+    amount: '',
     result: 0,
     changeList: ['UAH', "USD"],
     getList: ['USD', 'EUR', 'BTC']
@@ -85,40 +90,56 @@ export default function Converter({ data }) {
   }
 
   return (
-    <div className="converter">
-      <div className="converter__group">
-        <label>Change</label><br />
-        <input
+    <Box mx="auto" display="flex" justifyContent="center" mt={4}>
+      <Box mr={4}>
+        <TextField
+          label="Change"
+          variant="outlined"
           type="number"
           min="0"
           value={exchange.amount}
           onChange={handleChangeInput}
         />
-        <select value={exchange.base_ccy} onChange={handleChangeSelect}>
+
+        <TextField
+          value={exchange.base_ccy}
+          onChange={handleChangeSelect}
+          select
+          variant="outlined"
+        >
           {exchange.changeList.map((cur, i) =>
-            <option value={cur} key={i}>{cur}</option>
+            <MenuItem value={cur} key={i}>{cur}</MenuItem>
           )}
-        </select>
-      </div>
+        </TextField>
+      </Box>
 
-      <button onClick={swapValue}>
-        <span className="material-icons converter__btn">swap_horiz</span>
-      </button>
+      <Button variant="contained" color="primary"
+        onClick={swapValue} size="large" startIcon={<SwapHoriz />}
+      >
+        Swap
+      </Button>
 
-      <div className="converter__group">
-        <label>Get</label><br />
-        <input
+      <Box ml={4}>
+        <TextField
+          label="Get"
+          variant="outlined"
           type="number"
           min="0"
           value={exchange.result}
           readOnly={true}
         />
-        <select value={exchange.ccy} onChange={handleGetSelect}>
+
+        <TextField
+          value={exchange.ccy}
+          onChange={handleGetSelect}
+          select
+          variant="outlined"
+        >
           {exchange.getList.map((cur, i) =>
-            <option value={cur} key={i}>{cur}</option>
+            <MenuItem value={cur} key={i}>{cur}</MenuItem>
           )}
-        </select>
-      </div>
-    </div >
+        </TextField>
+      </Box>
+    </Box >
   )
 }
