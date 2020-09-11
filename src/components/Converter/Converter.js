@@ -36,7 +36,7 @@ export default function Converter({ data }) {
         getList: newList.map(i => i.ccy),
       }
     })
-  }, [data])
+  }, [])
 
   const handleChangeInput = (e) => {
     const value = e.target.value;
@@ -90,8 +90,8 @@ export default function Converter({ data }) {
   }
 
   return (
-    <Box mx="auto" display="flex" justifyContent="center" mt={4}>
-      <Box mr={4}>
+    <Box mx="auto" display="flex" justifyContent="center" mt={3} alignItems="center">
+      <Box mr={3} display="flex" flexWrap="wrap" justifyContent="flex-end">
         <TextField
           label="Change"
           variant="outlined"
@@ -119,7 +119,7 @@ export default function Converter({ data }) {
         Swap
       </Button>
 
-      <Box ml={4}>
+      <Box ml={3} display="flex" flexWrap="wrap">
         <TextField
           label="Get"
           variant="outlined"

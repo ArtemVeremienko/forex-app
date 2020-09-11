@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     marginBottom: 50
   },
   table: {
-    minWidth: 650,
+    minWidth: 450,
   },
   tableFirstRow: {
     fontSize: '1.3em',

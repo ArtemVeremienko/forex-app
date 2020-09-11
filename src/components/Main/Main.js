@@ -33,7 +33,7 @@ export default function Main() {
   }
 
   return (
-    <Box component="main" boxShadow={4} flexGrow={1} p={5}>
+    <Box component="main" boxShadow={4} flexGrow={1} py={4}>
       <Table
         data={data}
         isError={!(requestCount % 5)}
