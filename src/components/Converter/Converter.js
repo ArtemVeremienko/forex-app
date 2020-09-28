@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ConverterField from '../ConverterField/ConverterField'
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -18,6 +18,8 @@ export default function Converter({ data }) {
 
   const resultRound = (value, quote) => (value / quote).toFixed(3);
 
+  const result = useCallback(resultRound, [data])
+
   useEffect(() => {
     setExchange(prev => {
       const newList = data.filter(i => i.base_ccy === prev.from);
@@ -25,12 +27,12 @@ export default function Converter({ data }) {
       return {
         ...prev,
         quote: quote,
-        result: +resultRound(prev.amount, quote) || '',
+        result: +result(prev.amount, quote) || '',
         changeList: [...new Set(data.map(i => i.base_ccy))],
         getList: newList.map(i => i.ccy),
       }
     })
-  }, [data])
+  }, [data, result])
 
   const handleChangeInput = (e) => {
     const value = e.target.value;
