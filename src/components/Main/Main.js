@@ -8,14 +8,14 @@ const API = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';
 export default function Main() {
   const [requestCount, setRequestCount] = useState(localStorage.getItem('reqCounter') || 0);
 
-  const [data, setData] = useState([{ "ccy": "USD", "base_ccy": "UAH", "buy": "27.60000", "sale": "28.02000" }, { "ccy": "EUR", "base_ccy": "UAH", "buy": "32.40000", "sale": "33.01000" }, { "ccy": "BTC", "base_ccy": "USD", "buy": "9779.1368", "sale": "10808.5196" }]);
+  const [data, setData] = useState([{ "ccy": "USD", "base_ccy": "UAH", "buy": "28.00000", "sale": "28.41000" }, { "ccy": "EUR", "base_ccy": "UAH", "buy": "32.50000", "sale": "33.12000" }, { "ccy": "RUR", "base_ccy": "UAH", "buy": "0.35200", "sale": "0.38000" }, { "ccy": "BTC", "base_ccy": "USD", "buy": "10363.2449", "sale": "11454.1127" }]);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(API)
         .then(response => response.json())
         .catch(error => { setRequestCount(5); return []; });
-      setData(result.filter(item => item.ccy !== 'RUR'));
+      setData(result);
     };
 
     fetchData();
